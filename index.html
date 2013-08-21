@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Connect-firebase by ca98am79</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Connect-firebase</h1>
+        <p>Firebase session store for Connect</p>
+
+        <p class="view"><a href="https://github.com/ca98am79/connect-firebase">View the Project on GitHub <small>ca98am79/connect-firebase</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ca98am79/connect-firebase/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ca98am79/connect-firebase/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ca98am79/connect-firebase">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="connect-firebase" class="anchor" href="#connect-firebase"><span class="octicon octicon-link"></span></a>Connect Firebase</h1>
+
+<p>connect-firebase is a Firebase session store backed by the <a href="https://www.firebase.com/docs/nodejs-quickstart.html">firebase sdk</a></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>  $ npm install connect-firebase
+</code></pre>
+
+<h2>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<ul>
+<li>
+<code>firebase_url</code> An existing Firebase to store sessions</li>
+<li>
+<code>token</code> (optional) A Firebase authentication token</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>var options = {
+    // The URL you were given when you created your Firebase
+    firebase_url: 'connect-sessions.firebaseio.com',
+
+    // Optional. A Firebase authentication token
+    token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
+};
+
+var connect = require('connect'),
+    FirebaseStore = require('connect-firebase')(connect);
+connect()
+    .use(connect.cookieParser())
+    .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+</code></pre>
+
+<p>Or with <a href="http://expressjs.com/">express</a></p>
+
+<pre><code>FirebaseStore = require('connect-firebase')(express);
+var app = express(
+    express.cookieParser(), 
+    express.session({ store: new FirebaseStore(options), secret: 'keyboard cat'})
+);
+</code></pre>
+
+<h2>
+<a name="license---mit-license" class="anchor" href="#license---mit-license"><span class="octicon octicon-link"></span></a>LICENSE - "MIT License"</h2>
+
+<p>Copyright (c) 2013 Mike Carson, <a href="http://ca98am79.com/">http://ca98am79.com/</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ca98am79">ca98am79</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
