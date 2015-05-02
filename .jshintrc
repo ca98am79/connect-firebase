@@ -17,6 +17,8 @@
   "strict": false,
   "trailing": true,
   "smarttabs": false,
+  "mocha": true,
+
 
   "-W030": true,
   "-W052": true,
