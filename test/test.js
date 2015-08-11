@@ -3,6 +3,7 @@ var host = 'xxx.firebaseio.com';
 var authToken = 'xxxxx';
 
 var should = require('should'),
+    sinon = require('sinon'),
     session = require('express-session'),
     FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(session);
 
@@ -166,5 +167,28 @@ describe('FirebaseStore', function () {
             });
         });
 
+    });
+
+    describe('Reaping intervals', function () {
+        var spy;
+
+        before(function (done) {
+          var called = false;
+          spy = sinon.spy(function(err, res) {
+            if(called === false) {
+              called = true;
+              done();
+            }
+          });
+          var store = new FirebaseStore({
+              host: host,
+              reapInterval: 100,
+              reapCallback: spy
+          });
+        });
+
+        it('should call the reap callback', function () {
+            spy.called.should.be.true;
+        });
     });
 });

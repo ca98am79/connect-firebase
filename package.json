@@ -8,6 +8,7 @@
     "firebase": "*"
   },
   "devDependencies": {
+    "sinon": "*",
     "should": "*",
     "mocha": "*",
     "express-session": "*"

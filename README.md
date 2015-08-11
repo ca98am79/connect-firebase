@@ -10,15 +10,20 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
       $ npm install connect-firebase
 
 ## Options
-  
+
   - `host` An existing Firebase to store sessions
   - `token` (optional) A Firebase authentication token
   - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
+  - `reapCallback` (optional) a callback of the form `fn(err, removedIds)` to notify when a reap takes place.
 
 
 ## Usage
 
 ```js
+var notifyMe = function(err, removedIds) {
+  console.log('these IDs were removed:', removedIds);
+}
+
 var options = {
 
   // The URL you were given when you created your Firebase
@@ -29,8 +34,10 @@ var options = {
 
   // Optional. How often expired sessions should be cleaned up.
   // Defaults to 21600000 (6 hours).
-  reapInterval: 600000
+  reapInterval: 600000,
 
+  // Optional. Notifies with list of cleaned up session ids.
+  reapCallback: notifyMe
 };
 
 var connect = require('connect'),
@@ -41,15 +48,15 @@ connect()
 ```
 
  Or with [express](http://expressjs.com/)
- 
+
  **NOTE:** Due to express 4.x.x changes, we now need to pass express-session to the function `connect-firebase` exports in order to extend `express-session.Store`:
 
 ```js
 var session = require('express-session'),
   FirebaseStore = require('connect-firebase')(session);
 app.use(session({
-  store: new FirebaseStore(options), 
-  secret: 'keyboard cat' 
+  store: new FirebaseStore(options),
+  secret: 'keyboard cat'
 }));
 ```
 
